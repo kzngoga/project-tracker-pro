@@ -1,0 +1,8 @@
+.main-logo span {
+  position: relative;
+}
+
+.main-logo span::after {
+  content: "";
+  @apply absolute w-[24px] h-[6px] bg-primary left-[2px] top-[25px];
+}
