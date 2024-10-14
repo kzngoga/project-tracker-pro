@@ -3,15 +3,20 @@
 import { LoginData, loginSchema } from "@/lib/config/auth/login-schema";
 import { defaultValues } from "@/lib/config/auth/signup-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import FieldError from "../forms/field-error";
 import { Input } from "../ui/input";
 import PasswordField from "../forms/password-field";
 import Link from "next/link";
 import FormButton from "../forms/form-button";
+import { signIn } from "next-auth/react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function LoginForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
   const {
     handleSubmit,
     control,
@@ -22,8 +27,25 @@ export default function LoginForm() {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginData> = (data) => {
-    console.log("LOG", data);
+  const onSubmit: SubmitHandler<LoginData> = async (data) => {
+    setIsSubmitting(true);
+    const res = await signIn("credentials", {
+      email: data?.email,
+      password: data?.password,
+      redirect: false,
+    });
+
+    setIsSubmitting(false);
+
+    if (res?.error && !res.ok) {
+      toast({
+        variant: "destructive",
+        title: `${res.status} -  Login Error`,
+        description: res?.error,
+      });
+    } else {
+      window.location.href = "/dashboard";
+    }
   };
 
   return (
@@ -68,7 +90,7 @@ export default function LoginForm() {
         </Link>
       </div>
 
-      <FormButton type="submit" className="mt-6" isLoading={false}>
+      <FormButton type="submit" className="mt-6" isLoading={isSubmitting}>
         Sign In
       </FormButton>
     </form>
