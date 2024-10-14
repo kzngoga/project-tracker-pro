@@ -1,14 +1,15 @@
 "use client";
 
 import React from "react";
-import { Button } from "../ui/button";
-import Link from "next/link";
 import { Input } from "../ui/input";
 import PasswordField from "../forms/password-field";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { UserInput } from "@/lib/database/models/user.models";
 import FieldError from "../forms/field-error";
-import { defaultValues, signUpSchema } from "./signup-schema";
+import {
+  defaultValues,
+  signUpSchema,
+} from "../../lib/config/auth/signup-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSignupMutation } from "@/lib/api/user.api";
 import { useToast } from "@/hooks/use-toast";
@@ -121,15 +122,6 @@ export default function SignupForm() {
             );
           }}
         />
-      </div>
-
-      <div className="flex justify-end w-full mt-6">
-        <Link
-          className="font-semibold text-sm hover:text-primary"
-          href="/forgot-password"
-        >
-          Forgot Password?
-        </Link>
       </div>
 
       <FormButton type="submit" className="mt-6" isLoading={isPending}>
