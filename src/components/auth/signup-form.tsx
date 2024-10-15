@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Input } from "../ui/input";
-import PasswordField from "../forms/password-field";
+import { PasswordField } from "../forms/password-field";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { UserInput } from "@/lib/database/models/user.models";
 import FieldError from "../forms/field-error";
@@ -101,7 +101,11 @@ export default function SignupForm() {
           render={({ field }) => {
             return (
               <FieldError message={errors.password?.message}>
-                <PasswordField placeholder="Your Password" {...field} />
+                <PasswordField
+                  className="form-control"
+                  placeholder="Your Password"
+                  {...field}
+                />
               </FieldError>
             );
           }}

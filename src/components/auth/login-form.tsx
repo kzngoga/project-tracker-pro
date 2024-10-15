@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import FieldError from "../forms/field-error";
 import { Input } from "../ui/input";
-import PasswordField from "../forms/password-field";
+import { PasswordField } from "../forms/password-field";
 import Link from "next/link";
 import FormButton from "../forms/form-button";
 import { signIn } from "next-auth/react";
@@ -74,7 +74,11 @@ export default function LoginForm() {
           render={({ field }) => {
             return (
               <FieldError message={errors.password?.message}>
-                <PasswordField placeholder="Your Password" {...field} />
+                <PasswordField
+                  className="form-control"
+                  placeholder="Your Password"
+                  {...field}
+                />
               </FieldError>
             );
           }}
