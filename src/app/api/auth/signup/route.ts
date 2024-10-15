@@ -7,7 +7,8 @@ import { response } from "@/lib/helpers/response";
 import { ErrorTypes } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function POST(req: NextRequest, _res: NextResponse) {
   try {
     await dbConnect();
 

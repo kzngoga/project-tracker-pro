@@ -1,5 +1,5 @@
 import AuthWrapper from "@/components/auth/auth-wrapper";
-import { HomeIcon } from "lucide-react";
+import LoginForm from "@/components/auth/login-form";
 
 export default function LoginPage() {
   return (
@@ -11,7 +11,7 @@ export default function LoginPage() {
         href: "/signup",
       }}
     >
-      Login
+      <LoginForm />
     </AuthWrapper>
   );
 }
