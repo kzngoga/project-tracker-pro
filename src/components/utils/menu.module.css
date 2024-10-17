@@ -1,0 +1,4 @@
+.menu-content::before {
+  content: "";
+  @apply absolute w-0 h-0 border-[15px] border-solid border-transparent border-t-0 border-b-white top-[27px] right-[70px] hidden;
+}

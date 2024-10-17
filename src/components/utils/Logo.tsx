@@ -4,9 +4,10 @@ import styles from "./logo.module.css";
 
 interface LogoProps {
   wrapperClasses?: string;
+  textStyles?: string;
 }
 
-export default function Logo({ wrapperClasses }: LogoProps) {
+export default function Logo({ wrapperClasses, textStyles }: LogoProps) {
   return (
     <div
       className={cn(
@@ -16,7 +17,9 @@ export default function Logo({ wrapperClasses }: LogoProps) {
       )}
     >
       <SquareDashedKanban className="text-primary w-10 h-10" />
-      <span className="text-xl font-bold text-secondary">PT PRO</span>
+      <span className={cn("text-xl font-bold text-secondary", textStyles)}>
+        PT PRO
+      </span>
     </div>
   );
 }

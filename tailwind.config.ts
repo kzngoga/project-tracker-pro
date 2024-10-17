@@ -17,12 +17,21 @@ const config: Config = {
         },
         secondary: {
           DEFAULT: "#212529",
+          dark: "#404e67",
         },
         muted: {
           DEFAULT: "#919aa3",
+          light: "#f1f1f1",
         },
         error: {
           DEFAULT: "#F55D70",
+        },
+        link: {
+          DEFAULT: "#dcdcdc",
+          icon: "#c3c3c3",
+        },
+        warning: {
+          DEFAULT: "#fe8a7d",
         },
       },
     },
