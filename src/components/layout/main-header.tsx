@@ -10,7 +10,13 @@ import Menu, { MenuItem } from "../utils/menu";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
-export default function MainHeader() {
+export default function MainHeader({
+  title,
+  setShowSidebar,
+}: {
+  title: string;
+  setShowSidebar: () => void;
+}) {
   const router = useRouter();
 
   const menuItems: MenuItem[] = [
@@ -27,16 +33,20 @@ export default function MainHeader() {
 
   return (
     <div className="h-14 fixed w-full flex gap-6 items-center shadow-[0_0_11px_rgba(0,0,0,0.13)]">
-      <div className="w-60 bg-secondary-dark h-14 flex justify-between p-2.5 items-center">
+      <div className="w-60 bg-secondary-dark h-14 flex justify-between sm:justify-center p-2.5 items-center">
         <Logo textStyles="text-white" />
-        <IconButton variant="ghost">
+        <IconButton
+          variant="ghost"
+          className="block sm:hidden"
+          onClick={setShowSidebar}
+        >
           <MenuIcon className="text-white" />
         </IconButton>
       </div>
 
       {/* Page Title */}
       <div className="flex grow items-center justify-between pr-6">
-        <Pagetitle />
+        <Pagetitle title={title} />
         <Menu menuItems={menuItems} showLogout handleLogout={handleLogout}>
           <UserAvatar fullName="John Doe" />
         </Menu>

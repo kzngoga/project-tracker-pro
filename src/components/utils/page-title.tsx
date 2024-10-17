@@ -1,5 +1,11 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
-export default function Pagetitle() {
-  return <h4 className="font-bold text-lg">Title</h4>;
+interface PagetitleProps {
+  title: string;
+  wrapperClasses?: string;
+}
+
+export default function Pagetitle({ title, wrapperClasses }: PagetitleProps) {
+  return <h4 className={cn("font-bold text-lg", wrapperClasses)}>{title}</h4>;
 }

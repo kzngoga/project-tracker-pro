@@ -1,12 +1,4 @@
 .menu-content::before {
   content: "";
-  @apply absolute;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 15px solid white;
-  top: 27px;
-  right: 70px;
-  display: none;
+  @apply absolute w-0 h-0 border-[15px] border-solid border-transparent border-t-0 border-b-white top-[27px] right-[70px] hidden;
 }

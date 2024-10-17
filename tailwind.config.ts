@@ -26,6 +26,13 @@ const config: Config = {
         error: {
           DEFAULT: "#F55D70",
         },
+        link: {
+          DEFAULT: "#dcdcdc",
+          icon: "#c3c3c3",
+        },
+        warning: {
+          DEFAULT: "#fe8a7d",
+        },
       },
     },
   },

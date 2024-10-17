@@ -1,4 +1,3 @@
-import MainHeader from "@/components/layout/main-header";
 import React from "react";
 
 export default function MainLayout({
@@ -6,10 +5,5 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="w-full h-screen flex flex-col">
-      <MainHeader />
-      {children}
-    </div>
-  );
+  return <div className="w-full h-screen flex flex-col">{children}</div>;
 }
