@@ -17,9 +17,11 @@ const config: Config = {
         },
         secondary: {
           DEFAULT: "#212529",
+          dark: "#404e67",
         },
         muted: {
           DEFAULT: "#919aa3",
+          light: "#f1f1f1",
         },
         error: {
           DEFAULT: "#F55D70",
