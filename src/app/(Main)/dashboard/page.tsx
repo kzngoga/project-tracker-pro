@@ -1,5 +1,3 @@
-"use client";
-
 import MainWrapper from "@/components/dashboard/main-wrapper";
 
 export default function DashboardPage() {

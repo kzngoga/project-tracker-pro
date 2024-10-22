@@ -4,7 +4,7 @@ import React from "react";
 import { Input } from "../ui/input";
 import { PasswordField } from "../forms/password-field";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { UserInput } from "@/lib/database/models/user.models";
+import { UserInput } from "@/lib/database/models/user.model";
 import FieldError from "../forms/field-error";
 import {
   defaultValues,

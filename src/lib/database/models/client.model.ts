@@ -1,20 +1,23 @@
 import { formatApiResponse } from "@/lib/utils";
-import { Document, Model, Schema, model, models } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
+import { User } from "next-auth";
 
-export interface UserInput {
+export interface ClientInput {
   name: string;
-  password: string;
   email: string;
   phone: string;
 }
 
-export interface User extends UserInput {
+export interface ClientItem extends ClientInput {
   id: string;
+  user: User;
 }
 
-export interface IUser extends UserInput, Document {}
+export interface IClient extends ClientInput, Document {
+  user: Schema.Types.ObjectId;
+}
 
-const UserSchema = new Schema<IUser>(
+const ClientSchema = new Schema<IClient>(
   {
     name: {
       type: "String",
@@ -31,10 +34,10 @@ const UserSchema = new Schema<IUser>(
       maxlength: [10, "Must have 10 characters"],
       minlength: [10, "Must have 10 characters"],
     },
-    password: {
-      type: "String",
-      required: [true, "Please provide a password."],
-      minlength: [8, "Must have at least 8 characters"],
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Please provide a user ID."],
     },
   },
   {
@@ -42,10 +45,10 @@ const UserSchema = new Schema<IUser>(
   }
 );
 
-UserSchema.set("toJSON", {
+ClientSchema.set("toJSON", {
   transform: formatApiResponse,
 });
 
-const User = models.User || model<IUser>("User", UserSchema);
+const Client = models.Client || model<IClient>("Client", ClientSchema);
 
-export { User };
+export { Client };

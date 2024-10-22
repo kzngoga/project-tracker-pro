@@ -1,4 +1,4 @@
-import { User, UserInput } from "@/lib/database/models/user.models";
+import { User, UserInput } from "@/lib/database/models/user.model";
 
 interface FindOne {
   _id?: string;

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import MainHeader from "../layout/main-header";
 import Sidebar from "../layout/sidebar";
@@ -20,7 +22,9 @@ export default function MainWrapper({ children, title }: MainWrapperProps) {
       <div className="flex mt-14 h-[calc(100vh-56px)]">
         {showSidebar && <Sidebar />}
 
-        <div className="pt-5 px-8 pb-10 h-full overflow-auto">{children}</div>
+        <div className="pt-5 px-8 pb-10 h-full grow overflow-auto">
+          {children}
+        </div>
       </div>
     </>
   );

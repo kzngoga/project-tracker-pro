@@ -1,4 +1,4 @@
-import { UserInput } from "@/lib/database/models/user.models";
+import { UserInput } from "@/lib/database/models/user.model";
 import * as yup from "yup";
 
 export const defaultValues: UserInput = {
