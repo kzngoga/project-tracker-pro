@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import dbConnect from "@/lib/database/config";
-import { UserInput } from "@/lib/database/models/user.models";
+import { UserInput } from "@/lib/database/models/user.model";
 import UserService from "@/lib/database/services/user.service";
 import { hashPassword } from "@/lib/helpers/password";
 import { response } from "@/lib/helpers/response";

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ErrorTypes } from "@/types";
 import axios, { AxiosError } from "axios";
 
 export const ApiClient = axios.create({
@@ -11,6 +13,13 @@ export interface ApiError {
   message: string;
   code?: string;
   status?: number;
+}
+
+export interface ApiResponse {
+  status: number;
+  message: string;
+  data: any;
+  error?: ErrorTypes;
 }
 
 // Helper function to handle errors

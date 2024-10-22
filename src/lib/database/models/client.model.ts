@@ -1,18 +1,19 @@
 import { formatApiResponse } from "@/lib/utils";
 import { Document, Schema, model, models } from "mongoose";
+import { User } from "next-auth";
 
 export interface ClientInput {
   name: string;
   email: string;
   phone: string;
-  user: string;
 }
 
-export interface Client extends ClientInput {
+export interface ClientItem extends ClientInput {
   id: string;
+  user: User;
 }
 
-export interface IClient extends Omit<ClientInput, "user">, Document {
+export interface IClient extends ClientInput, Document {
   user: Schema.Types.ObjectId;
 }
 

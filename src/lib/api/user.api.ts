@@ -1,6 +1,6 @@
 import { ApiClient, APIHookParams, handleApiError } from "@/store/config";
 import { User } from "next-auth";
-import { UserInput } from "../database/models/user.models";
+import { UserInput } from "../database/models/user.model";
 import { useMutation } from "@tanstack/react-query";
 
 export const signUp = async (data: UserInput): Promise<User> => {

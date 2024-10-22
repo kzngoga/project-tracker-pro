@@ -3,10 +3,15 @@ import { Client, ClientInput } from "@/lib/database/models/client.model";
 interface FindOne {
   _id?: string;
   user?: string;
+  email?: string;
+}
+
+interface ClientFormData extends ClientInput {
+  user: string;
 }
 
 class ClientService {
-  static async createClient(newClient: ClientInput) {
+  static async createClient(newClient: ClientFormData) {
     try {
       return await Client.create(newClient);
     } catch (error) {
@@ -14,9 +19,9 @@ class ClientService {
     }
   }
 
-  static async fetchClients() {
+  static async fetchClients(clientId: string) {
     try {
-      return await Client.find();
+      return await Client.find({ user: clientId }).populate("user");
     } catch (error) {
       throw error;
     }

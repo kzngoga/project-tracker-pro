@@ -1,11 +1,11 @@
-import { ApiClient, handleApiError } from "@/store/config";
+import { ApiClient, ApiResponse, handleApiError } from "@/store/config";
 import { useQuery } from "@tanstack/react-query";
-import { Client } from "../database/models/client.model";
+import { ClientItem } from "../database/models/client.model";
 
-export const fetchClients = async (): Promise<Client> => {
+export const fetchClients = async (): Promise<ClientItem[]> => {
   try {
-    const response = await ApiClient.get<Client>("/clients/all");
-    return response.data;
+    const response = await ApiClient.get<ApiResponse>("/clients/all");
+    return response.data?.data as ClientItem[];
   } catch (error) {
     throw handleApiError(error);
   }
@@ -14,7 +14,7 @@ export const fetchClients = async (): Promise<Client> => {
 // Hooks
 export const useFetchClientsQuery = () => {
   return useQuery({
-    queryKey: ['clients'],
+    queryKey: ["clients"],
     queryFn: fetchClients,
   });
 };

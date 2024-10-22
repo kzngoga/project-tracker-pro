@@ -18,6 +18,7 @@ const config: Config = {
         secondary: {
           DEFAULT: "#212529",
           dark: "#404e67",
+          gray: "#505458",
         },
         muted: {
           DEFAULT: "#919aa3",
