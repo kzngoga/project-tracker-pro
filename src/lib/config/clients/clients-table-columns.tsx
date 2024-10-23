@@ -9,6 +9,7 @@ export const columns: ColumnDef<ClientItem>[] = [
     cell({ row }) {
       return <div className="">{row.index + 1}</div>;
     },
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "name",
@@ -43,5 +44,6 @@ export const columns: ColumnDef<ClientItem>[] = [
   {
     accessorKey: "phone",
     header: "Phone No.",
+    enableGlobalFilter: false,
   },
 ];

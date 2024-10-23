@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
@@ -50,6 +52,7 @@ export function DataTable<TData, TValue>({
   onActionClick,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState<any>([]);
 
   const table = useReactTable({
     data,
@@ -57,9 +60,13 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: "includesString",
     state: {
       sorting,
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter,
   });
 
   return (
@@ -74,10 +81,11 @@ export function DataTable<TData, TValue>({
       )}
 
       {/* TABLE ACTIONS */}
-      <div className="flex items-center justify-end gap-4">
+      <div className="flex items-center justify-between gap-4">
         <Input
           className="form-control w-[300px]"
           placeholder={searchPlaceholder}
+          onChange={(e) => table.setGlobalFilter(String(e.target.value))}
         />
         {onActionClick && (
           <Button onClick={onActionClick} className="gap-2">
@@ -107,7 +115,7 @@ export function DataTable<TData, TValue>({
           ))}
         </TableHeader>
         <TableBody>
-          {match({ isLoading, hasError })
+          {match({ isLoading, hasError, data })
             .with({ isLoading: true, hasError: false }, () => (
               <TableLoader colSpan={columns.length} />
             ))
@@ -116,21 +124,25 @@ export function DataTable<TData, TValue>({
             ))
             .otherwise(() => (
               <>
-                {table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
+                {!table.getRowModel().rows.length ? (
+                  <TableError colSpan={columns.length} text={errorMessage} />
+                ) : (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                )}
               </>
             ))}
         </TableBody>
